@@ -4,7 +4,7 @@
 
     cm.helper = {};
     cm.plugin = {};
-    cm.init = {};
+    cm.init = {};   
 
 }
 
@@ -432,6 +432,60 @@ cm.helper.fnManage = new function CmHelperFnManage() {
 
     return this;
 
+}
+cm.helper.cookie = new function AaHelperCookie() {
+
+    this.set = function AaHelperCookieSet(cname, cvalue, exdays) {
+        var d = new Date();
+        exdays = exdays ? exdays : 1;
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + "; " + expires;
+    }
+
+    this.get = function AaHelperCookieGet(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return "";
+    }
+
+    this.del = function AaHelperCookieDel(cname) {
+        document.cookie = cname + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    return this;
+}
+cm.helper.cookie = new function AaHelperCookie() {
+
+    this.set = function AaHelperCookieSet(cname, cvalue, exdays) {
+        var d = new Date();
+        exdays = exdays ? exdays : 1;
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + "; " + expires;
+    }
+
+    this.get = function AaHelperCookieGet(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return "";
+    }
+
+    this.del = function AaHelperCookieDel(cname) {
+        document.cookie = cname + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    return this;
 }
 
 // Plugins - Métodos auxiliares e que serão utilizados no primeiro load da página 
